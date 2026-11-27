@@ -1,0 +1,384 @@
+-- All Sources Are Public & Free - https://discord.gg/cSthtkp5dD
+
+function function_0342(...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v2 = getgenv()
+    v5 = upvalue_2()
+    v5 = os.time()
+    v2 = upvalue_0:JSONEncode(
+        {
+            username = upvalue_1.LocalPlayer.Name,
+            random = v5,
+            ostime = v5,
+            type = "insert",
+        })
+    v1 = {
+            Url = ("https://banana-hub.xyz/api/v1/ndesxjfgev" .. ("/" .. v2.Key)),
+            Method = "POST",
+            Headers = { ["Content-Type"] = "application/json" },
+        }
+    v1.Body = v2
+    if upvalue_3 then
+        v1[upvalue_3] = "spy_trap"
+    end
+    v2, v3 = upvalue_4(v1)
+    if v2 then
+        if respone then
+            v4, v5 = pcall(function_0344)
+            if (respone.StatusCode == 200) then
+                if v4 then
+                    if not (v5) then
+                        print("[Chuoi Hub] ? Heartbeat sent successfully")
+                        return false
+                    else
+                        if not (v5.token) then
+                            print("[Chuoi Hub] ? Heartbeat sent successfully")
+                            return false
+                        else
+                            if upvalue_6 then
+                                v6 = upvalue_7(v5.token, upvalue_6)
+                                if not (v6) then
+                                    upvalue_6 = v5.token
+                                else
+                                    warn("[Chuoi Hub] ? Heartbeat: static token detected, kicking")
+                                    pcall(function_0345)
+                                    return true
+                                end
+                            end
+                            upvalue_6 = v5.token
+                        end
+                    end
+                end
+            else
+                v6 = v4
+                if v4 then
+                    v6 = v5
+                end
+                if v6 then
+                    v6 = v5.error
+                end
+                if not (v6) then
+                    v6 = "Heartbeat fail"
+                end
+                warn(("[Chuoi Hub] ? Heartbeat: " .. v6))
+                pcall(function_0343)
+                return true
+            end
+        else
+            return false
+        end
+    end
+    return false
+end
+
+function function_0213(...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v4 = getgenv()
+    v3 = game:GetService("HttpService")
+    v6 = RandomString()
+    v6 = os.time()
+    v3 = v3:JSONEncode(
+        {
+            username = game.Players.LocalPlayer.Name,
+            random = v6,
+            ostime = v6,
+            type = "insert",
+        })
+    v2 = {
+            Url = (apiLimit .. ("/" .. v4.Key)),
+            Method = "POST",
+            Headers = { ["Content-Type"] = "application/json" },
+        }
+    v2.Body = v3
+    v1 = ExploitReq(v2)
+    v2 = game:GetService("HttpService")
+    v2 = v2:JSONDecode(v1.Body)
+    if (v1.StatusCode == 200) then
+        return false
+    else
+        game.Players.LocalPlayer:Kick(("Error: " .. v2.error))
+        return true
+    end
+end
+
+function function_0429(arg1, arg2, ...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    local loop_exit_429_1 = 0
+    while true do
+        -- numeric-for setup uses v4, v5, v6
+        v2 = arg2
+        v3 = 0
+        v4 = 0
+        v5 = upvalue_0.RETRY_MAX
+        v6 = 1
+        local loop_exit_429_36 = 0
+        while true do
+            if not (numeric_for_continues) then
+                loop_exit_429_36 = 1
+                break
+            end
+            v8, v9 = v8(function_0430)
+            if not (v8) then
+                loop_exit_429_36 = 6
+                break
+            else
+                if v9 then
+                    v10 = v9.StatusCode
+                    if not (v9.StatusCode) then
+                        v10 = v9.Status
+                    end
+                    if not (v10) then
+                        v10 = 0
+                    end
+                    if (v10 ~= 429) then
+                        loop_exit_429_36 = 4
+                        break
+                    else
+                        v3 = (v3 + 1)
+                        if (upvalue_0.RETRY_MAX > v7) then
+                            if (2 > v3) then
+                                v12 = v12["pow"](upvalue_0.RETRY_BASE, (v7 + 1))
+                                v13 = upvalue_2()
+                                v11 = (v12 + v13)
+                            else
+                                v13 = upvalue_2()
+                                v11 = (upvalue_0.RATE_COOLDOWN + v13)
+                            end
+                            v12 = string.format
+                            if numeric_for_continues then
+                                loop_exit_429_36 = 2
+                                break
+                            else
+                                v12 = v12(v13, v11, (v7 + 1), upvalue_0.RETRY_MAX, v17)
+                                v16 = upvalue_0.RETRY_MAX
+                                if not (arg2) then
+                                    upvalue_4.Visible = true
+                                    upvalue_5.Text = v12
+                                else
+                                    v13(v12)
+                                    upvalue_4.Visible = false
+                                end
+                                v14 = math(v11)
+                                upvalue_6(("RATE LIMITED \xE2\x80\x94 WAITING " .. v14), upvalue_7.AMBER)
+                                v14 = string.format(upvalue_7.AMBER, v11)
+                                upvalue_13[nil] = nil
+                                v14 = string.format(table.unpack(registers, 15, 67))
+                                warn(table.unpack(registers, 14, stack_top))
+                                v13 = math.floor(v11)
+                                task.spawn(function_0431)
+                                task.wait(v11)
+                                if arg2 then
+                                    upvalue_11()
+                                end
+                                -- close captured locals at v7
+                            end
+                            continue
+                        else
+                            loop_exit_429_36 = 3
+                            break
+                        end
+                    end
+                else
+                    loop_exit_429_36 = 5
+                    break
+                end
+            end
+        end
+        if loop_exit_429_36 == 1 then
+            loop_exit_429_1 = 5
+            break
+        elseif loop_exit_429_36 == 2 then
+            continue
+        elseif loop_exit_429_36 == 3 then
+            loop_exit_429_1 = 1
+            break
+        elseif loop_exit_429_36 == 4 then
+            loop_exit_429_1 = 2
+            break
+        elseif loop_exit_429_36 == 5 then
+            loop_exit_429_1 = 3
+            break
+        elseif loop_exit_429_36 == 6 then
+            loop_exit_429_1 = 4
+            break
+        end
+    end
+    if loop_exit_429_1 == 1 then
+        return (v0 <= nil), "RATE_LIMIT"
+    elseif loop_exit_429_1 == 2 then
+        if (v10 ~= 403) then
+            if (v10 ~= 401) then
+                if (500 > v10) then
+                    if not ((v10 == 200)) then
+                        if (v10 == 0) then
+                            if v9.Body then
+                                if (v9.Body ~= "") then
+                                    v11, v12 = pcall(upvalue_12.JSONDecode, upvalue_12, v9.Body)
+                                    v14 = v9.Body
+                                    if v11 then
+                                        if v12 then
+                                            return v12, nil
+                                        else
+                                            return (nil <= v0), "INVALID_JSON"
+                                        end
+                                    end
+                                    return (nil <= v0), "INVALID_JSON"
+                                else
+                                    return nil, "EMPTY_BODY"
+                                end
+                            end
+                            return nil, "EMPTY_BODY"
+                        else
+                            v12 = tostring(v10)
+                            return nil, ("HTTP_" .. v12)
+                        end
+                    end
+                    if v9.Body then
+                        if (v9.Body ~= "") then
+                            v11, v12 = pcall(upvalue_12.JSONDecode, upvalue_12, v9.Body)
+                            v14 = v9.Body
+                            if v11 then
+                                if v12 then
+                                    return v12, nil
+                                else
+                                    -- no recovered source operation
+                                end
+                            end
+                        else
+                            -- no recovered source operation
+                        end
+                    end
+                else
+                    return v11, "SERVER_ERROR"
+                end
+            else
+                return nil, "UNAUTHORIZED"
+            end
+        else
+            return v11, "FORBIDDEN"
+        end
+    elseif loop_exit_429_1 == 3 then
+        return nil, "NETWORK_ERROR"
+    elseif loop_exit_429_1 == 4 then
+        return nil, "NETWORK_ERROR"
+    elseif loop_exit_429_1 == 5 then
+        -- restore numeric-for state
+        -- copy remaining varargs into temporaries beginning at v4
+        return select(1, ...), "RATE_LIMIT"
+    end
+end
+
+function function_1111(...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v3 = string.format
+    v4 = "%s/schema/init?authId=%s&userId=%s"
+    v5 = "https://cfg.banana-hub.xyz"
+    v6 = upvalue_0
+    v10 = nil
+    while true do
+        v8 = v8(v9, v10)
+        v6 = v6:UrlEncode(v8)
+        v7 = upvalue_0:UrlEncode(upvalue_2)
+        v3 = v3(table.unpack(registers, 4, stack_top))
+        v2.Url = v3
+        v2.Method = "POST"
+        v0 = (v0 == v77)
+        v8 = upvalue_0
+        v9 = upvalue_2
+    end
+end
+
+function function_0216(...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v1 = upvalue_0
+    if not (upvalue_0) then
+        if not (opaque_predicate) then
+            v12 = 1
+        end
+        if not (v12) then
+            -- no recovered source operation
+        end
+        v6[77] = ((25823 + v12) + -25825)
+        v7[72] = 10
+        -- copy remaining varargs into temporaries beginning at v0
+        v1 = ("Chuoi Hu" .. v187)
+    end
+    warn(("[Chuoi Hub] ? " .. v1))
+    v187(v188)
+    wait(2)
+    while true do
+    end
+end
+
+function function_0010(arg1, ...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v3 = arg1:byte()
+    -- numeric-for setup uses v4, v5, v6
+    v2 = ""
+    v4 = 8
+    v5 = 1
+    v6 = -1
+    while true do
+        if not (numeric_for_continues) then
+            break
+        end
+        v8 = "1"
+        v157 = select(1, ...)
+        if not ("1") then
+            v8 = "0"
+        end
+        v2 = (v2 .. v8)
+    end
+    -- restore numeric-for state
+    return v157
+end
+function encode(arg1, ...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v2 = arg1:gsub(".", function_0010, v6)
+    v2 = (v2 .. "0000"):gsub("%d%d%d?%d?%d?%d?", function_0011, v6)
+    return (v2 .. (
+    {
+        [1] = "",
+        [2] = "==",
+        [3] = "=",
+    })[((#(arg1) % 3) + 1)])
+end
+
+function function_0011(arg1, ...)
+    -- vN names below are only used where the destroyed local name could not be inferred.
+    v1 = arg1
+    v2 = #(arg1)
+    if (#(arg1) >= 6) then
+        -- numeric-for setup uses v3, v4, v5
+        v3 = 1
+        v4 = 6
+        v5 = 1
+        while true do
+            if not (numeric_for_continues) then
+                break
+            end
+            v7 = arg1:sub(v9, v6, v11)
+            v7 = (v7 == "1")
+            if (v7 == "1") then
+                v7 = (2 ^ (6 - v6))
+            end
+            if not (v7) then
+                v7 = 0
+            end
+            v2 = (v2 + v7)
+        end
+        -- restore numeric-for state
+        return ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"):sub((v2 + 1), (v2 + 1))
+    else
+        v32 = v32(v33)
+        if not (opaque_predicate) then
+            v19 = 9
+        end
+        if not (v19) then
+            -- no recovered source operation
+        end
+        v14[84] = ((22781 + v19) + -22816)
+        v14[18] = 83
+        return v187
+    end
+end
